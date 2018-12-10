@@ -1,11 +1,9 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 from keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
 from time import time
 from keras.callbacks import TensorBoard
 from keras.models import Sequential
-from keras.layers import SimpleRNN, Activation, Dense, Dropout, Embedding, LSTM, Conv1D, MaxPooling1D
+from keras.layers import Activation, Dense, Dropout, Embedding, LSTM, Conv1D, MaxPooling1D
 from keras.preprocessing.text import Tokenizer
 import numpy
 
@@ -40,9 +38,9 @@ shape = x_train.shape
 tb = TensorBoard(log_dir='logs/{}'.format(time()))
 
 lstm_model = Sequential()
-lstm_model.add(Embedding(10000, 8))
+lstm_model.add(Embedding(10000, 15))
 lstm_model.add(Dropout(.25))
-lstm_model.add(Conv1D(64, 5, padding='valid', activation='tanh'))
+lstm_model.add(Conv1D(64, 5, padding='valid', activation='relu'))
 lstm_model.add(MaxPooling1D(pool_size=4))
 lstm_model.add(LSTM(70))
 lstm_model.add(Dense(1))
