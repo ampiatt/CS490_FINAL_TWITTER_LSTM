@@ -38,7 +38,7 @@ shape = x_train.shape
 tb = TensorBoard(log_dir='logs/{}'.format(time()))
 
 lstm_model = Sequential()
-lstm_model.add(Embedding(10000, 15))
+lstm_model.add(Embedding(10000, 32))
 lstm_model.add(Dropout(.25))
 lstm_model.add(Conv1D(64, 5, padding='valid', activation='relu'))
 lstm_model.add(MaxPooling1D(pool_size=4))
@@ -47,6 +47,6 @@ lstm_model.add(Dense(1))
 lstm_model.add(Activation('sigmoid'))
 
 lstm_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-lstm_model.fit(x_train, y_train, epochs = 5, batch_size=15, callbacks=[tb])
+lstm_model.fit(x_train, y_train, epochs = 50, batch_size=15, callbacks=[tb])
 
 score, accuracy = lstm_model.evaluate(x_test, y_test, verbose=0)
